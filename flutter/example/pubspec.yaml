@@ -1,0 +1,18 @@
+name: force_update_example
+description: Minimal host app that compiles and analyzes ../force_update.dart.
+publish_to: none
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.3.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  package_info_plus: ^10.2.2
+  shared_preferences: ^2.5.6
+  url_launcher: ^6.3.3
+
+flutter:
+  uses-material-design: true

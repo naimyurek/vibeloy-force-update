@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "app": { "slug": "butcep", "name": "Bütcep" },
+  "ios": {
+    "minVersion": "1.2.0",
+    "latestVersion": "1.4.0",
+    "storeUrl": "https://apps.apple.com/app/id123456789"
+  },
+  "android": {
+    "minVersion": "1.2.0",
+    "latestVersion": "1.4.0",
+    "storeUrl": "https://play.google.com/store/apps/details?id=com.butcep"
+  },
+  "message": { "tr": "Yeni sürüm hazır.", "en": "A new version is ready." },
+  "updatedAt": "2026-11-01T10:00:00.000Z"
+}

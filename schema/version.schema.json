@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/naimyurek/vibeloy-force-update/main/schema/version.schema.json",
+  "title": "Vibeloy version policy manifest",
+  "description": "Served at https://<slug>.vibeloy.dev/version.json. Clients ignore unknown keys, and show nothing when the manifest cannot be used.",
+  "type": "object",
+  "required": ["schemaVersion"],
+  "additionalProperties": true,
+  "properties": {
+    "schemaVersion": {
+      "description": "Manifest format version. Clients ignore the manifest unless this is exactly 1.",
+      "const": 1
+    },
+    "app": {
+      "description": "Informational. Clients do not read this block.",
+      "anyOf": [{ "$ref": "#/$defs/app" }, { "type": "null" }]
+    },
+    "ios": {
+      "description": "Policy for iOS. Null or missing: the iOS client shows nothing.",
+      "anyOf": [{ "$ref": "#/$defs/platform" }, { "type": "null" }]
+    },
+    "android": {
+      "description": "Policy for Android. Null or missing: the Android client shows nothing.",
+      "anyOf": [{ "$ref": "#/$defs/platform" }, { "type": "null" }]
+    },
+    "message": {
+      "description": "Overrides the dialog body text. Null or missing: clients use their default text.",
+      "anyOf": [{ "$ref": "#/$defs/message" }, { "type": "null" }]
+    },
+    "updatedAt": {
+      "description": "ISO 8601 timestamp of the last policy change. Informational.",
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    }
+  },
+  "$defs": {
+    "nullableString": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "app": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "slug": { "$ref": "#/$defs/nullableString" },
+        "name": { "$ref": "#/$defs/nullableString" }
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "minVersion": {
+          "description": "Versions below this get the force dialog.",
+          "$ref": "#/$defs/nullableString"
+        },
+        "latestVersion": {
+          "description": "Versions below this (and not below minVersion) get the soft dialog.",
+          "$ref": "#/$defs/nullableString"
+        },
+        "storeUrl": {
+          "description": "Opened by the Update button. Null: Android falls back to the Play Store by package name, iOS hides the button.",
+          "$ref": "#/$defs/nullableString"
+        }
+      }
+    },
+    "message": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "tr": { "$ref": "#/$defs/nullableString" },
+        "en": { "$ref": "#/$defs/nullableString" }
+      }
+    }
+  }
+}
